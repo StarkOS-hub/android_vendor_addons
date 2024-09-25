@@ -8,6 +8,12 @@ prebuilt_etc {
     src: "sysconfig-app.lawnchair.xml",
     relative_install_path: "sysconfig",
 }
+
+optional_uses_libs: [
+    "androidx.window.extensions",
+    "androidx.window.sidecar",
+],
+
 android_app_import {
     name: "Lawnchair",
     apk: "Lawnchair.apk",
