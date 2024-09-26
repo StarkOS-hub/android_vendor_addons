@@ -1,0 +1,11 @@
+android_app_import {
+    name: "DuckDuckGo",
+    apk: "DuckDuckGo.apk",
+    preprocessed: true,
+    presigned: true,
+    product_specific: true,
+    overrides: ["Jelly", "Browser2",],
+    dex_preopt: {
+        enabled: false,
+    },
+}
