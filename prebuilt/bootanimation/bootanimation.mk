@@ -11,3 +11,4 @@ else
     endif
     # Default to 720p if no resolution is defined or supported
     PRODUCT_COPY_FILES += vendor/addons/prebuilt/bootanimation/bootanimation_720.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip
+endif
