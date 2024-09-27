@@ -39,11 +39,11 @@ PRODUCT_COPY_FILES += \
 
 #stark custom apps
 PRODUCT_PACKAGES += \
+    Music \
     DuckDuckGo \
     Lawnchair \
     LawnchairOverlay \
-    Lawnicons \
-    Music
+    Lawnicons 
 
 # Clocks
 PRODUCT_PACKAGES += \
