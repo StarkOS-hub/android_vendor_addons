@@ -10,21 +10,30 @@
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
 #
 
+LOCAL_PATH := $(call my-dir)
+
+# Define bootanimation for 720p resolution
 ifeq ($(TARGET_BOOT_ANIMATION_RES),720)
-    PRODUCT_COPY_FILES += vendor/addons/prebuilt/bootanimation/bootanimation_720.zip:$(TARGET_OUT_PRODUCT)/media/bootanimation.zip
+    include $(CLEAR_VARS)
+    LOCAL_MODULE := bootanimation.zip
+    LOCAL_MODULE_CLASS := ETC
+    LOCAL_MODULE_TAGS := optional
+    LOCAL_SRC_FILES := bootanimation_720.zip
+    LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/media
+    LOCAL_MODULE_STEM := bootanimation.zip
+    include $(BUILD_PREBUILT)
+
+# Fallback to 720p if resolution is not defined or unsupported
 else
-    $(warning "TARGET_BOOT_ANIMATION_RES is undefined or not supported, assuming 720p")
-    PRODUCT_COPY_FILES += vendor/addons/prebuilt/bootanimation/bootanimation_720.zip:$(TARGET_OUT_PRODUCT)/media/bootanimation.zip
+    $(warning "TARGET_BOOT_ANIMATION_RES is undefined or unsupported, assuming 720p")
+    include $(CLEAR_VARS)
+    LOCAL_MODULE := bootanimation.zip
+    LOCAL_MODULE_CLASS := ETC
+    LOCAL_MODULE_TAGS := optional
+    LOCAL_SRC_FILES := bootanimation_720.zip
+    LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/media
+    LOCAL_MODULE_STEM := bootanimation.zip
+    include $(BUILD_PREBUILT)
 endif
-
-# Create a symbolic link for bootanimation-dark.zip if necessary
-BOOTANIMATION_SYMLINK := $(TARGET_OUT_PRODUCT)/media/bootanimation-dark.zip
-$(BOOTANIMATION_SYMLINK): $(LOCAL_INSTALLED_MODULE)
-	@mkdir -p $(dir $@)
-	$(hide) ln -sf bootanimation.zip $@
-
-ALL_DEFAULT_INSTALLED_MODULES += $(BOOTANIMATION_SYMLINK)
